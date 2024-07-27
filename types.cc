@@ -19,6 +19,11 @@ void checkAssignment(Types lValue, Types rValue, string message) {
 			appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
 }
 
+void checkListVar(Types lValue, Types rValue) {
+	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
+		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type ");
+}
+
 Types checkWhen(Types true_, Types false_) {
 	if (true_ == MISMATCH || false_ == MISMATCH)
 		return MISMATCH;
@@ -42,7 +47,7 @@ Types checkCases(Types left, Types right) {
 	return MISMATCH;
 }
 
-Types checkLists(Types left, Types right) {
+Types checkListElems(Types left, Types right) {
 	if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
 	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match");
