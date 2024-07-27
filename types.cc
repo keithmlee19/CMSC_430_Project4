@@ -1,7 +1,7 @@
 // CMSC 430 Compiler Theory and Design
 // Project 4 Skeleton
-// UMGC CITE
-// Summer 2023
+// Keith Lee
+// Summer 2024
 
 // This file contains the bodies of the type checking functions
 

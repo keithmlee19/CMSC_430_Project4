@@ -1,7 +1,7 @@
 /* CMSC 430 Compiler Theory and Design
    Project 4 Skeleton
-   UMGC CITE
-   Summer 2023
+   Keith Lee
+   Summer 2024
    
    Project 4 Parser with semantic actions for static semantic errors */
 
@@ -34,12 +34,12 @@ Symbols<Types> lists;
 
 %token <iden> IDENTIFIER
 
-%token <type> INT_LITERAL CHAR_LITERAL
+%token <type> INT_LITERAL CHAR_LITERAL REAL_LITERAL
 
 %token ADDOP MULOP RELOP ANDOP ARROW
 
 %token BEGIN_ CASE CHARACTER ELSE END ENDSWITCH FUNCTION INTEGER IS LIST OF OTHERS
-	RETURNS SWITCH WHEN
+	REAL RETURNS SWITCH WHEN
 
 %type <type> list expressions body type statement_ statement cases case expression
 	term primary
@@ -55,7 +55,8 @@ function_header:
 
 type:
 	INTEGER {$$ = INT_TYPE;} |
-	CHARACTER {$$ = CHAR_TYPE; };
+	CHARACTER {$$ = CHAR_TYPE; } |
+	REAL {$$ = REAL_TYPE; };
 	
 optional_variable:
 	variable |
@@ -113,6 +114,7 @@ primary:
 	'(' expression ')' {$$ = $2;} |
 	INT_LITERAL | 
 	CHAR_LITERAL |
+	REAL_LITERAL |
 	IDENTIFIER '(' expression ')' {$$ = find(lists, $1, "List");} |
 	IDENTIFIER  {$$ = find(scalars, $1, "Scalar");} ;
 
