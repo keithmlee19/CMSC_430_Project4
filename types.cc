@@ -15,7 +15,8 @@ using namespace std;
 
 void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
-		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
+		if (!((lValue == INT_TYPE && rValue == REAL_TYPE) || (lValue == REAL_TYPE && rValue == INT_TYPE)))
+			appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
 }
 
 Types checkWhen(Types true_, Types false_) {
@@ -45,6 +46,10 @@ Types checkArithmetic(Types left, Types right) {
 	if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
 	if (left == INT_TYPE && right == INT_TYPE)
+		return INT_TYPE;
+	if (left == INT_TYPE && right == REAL_TYPE)
+		return INT_TYPE;
+	if (left == REAL_TYPE && right == INT_TYPE)
 		return INT_TYPE;
 	appendError(GENERAL_SEMANTIC, "Integer Type Required");
 	return MISMATCH;
