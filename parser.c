@@ -1480,80 +1480,86 @@ yyreduce:
 #line 1481 "parser.tab.c"
     break;
 
+  case 12: /* expressions: expressions ',' expression  */
+#line 73 "parser.y"
+                                   {(yyval.type) = checkLists((yyvsp[-2].type), (yyvsp[0].type));}
+#line 1487 "parser.tab.c"
+    break;
+
   case 14: /* body: BEGIN_ statement_ END ';'  */
 #line 77 "parser.y"
                                   {(yyval.type) = (yyvsp[-2].type);}
-#line 1487 "parser.tab.c"
+#line 1493 "parser.tab.c"
     break;
 
   case 16: /* statement_: error ';'  */
 #line 81 "parser.y"
                   {(yyval.type) = MISMATCH;}
-#line 1493 "parser.tab.c"
+#line 1499 "parser.tab.c"
     break;
 
   case 18: /* statement: WHEN condition ',' expression ':' expression  */
 #line 86 "parser.y"
                 {(yyval.type) = checkWhen((yyvsp[-2].type), (yyvsp[0].type));}
-#line 1499 "parser.tab.c"
+#line 1505 "parser.tab.c"
     break;
 
   case 19: /* statement: SWITCH expression IS cases OTHERS ARROW statement ';' ENDSWITCH  */
 #line 88 "parser.y"
                 {(yyval.type) = checkSwitch((yyvsp[-7].type), (yyvsp[-5].type), (yyvsp[-2].type));}
-#line 1505 "parser.tab.c"
+#line 1511 "parser.tab.c"
     break;
 
   case 20: /* cases: cases case  */
 #line 91 "parser.y"
                    {(yyval.type) = checkCases((yyvsp[-1].type), (yyvsp[0].type));}
-#line 1511 "parser.tab.c"
+#line 1517 "parser.tab.c"
     break;
 
   case 21: /* cases: %empty  */
 #line 92 "parser.y"
                {(yyval.type) = NONE;}
-#line 1517 "parser.tab.c"
+#line 1523 "parser.tab.c"
     break;
 
   case 22: /* case: CASE INT_LITERAL ARROW statement ';'  */
 #line 95 "parser.y"
                                              {(yyval.type) = (yyvsp[-1].type);}
-#line 1523 "parser.tab.c"
+#line 1529 "parser.tab.c"
     break;
 
   case 27: /* expression: expression ADDOP term  */
 #line 106 "parser.y"
                               {(yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type));}
-#line 1529 "parser.tab.c"
+#line 1535 "parser.tab.c"
     break;
 
   case 29: /* term: term MULOP primary  */
 #line 110 "parser.y"
                            {(yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type));}
-#line 1535 "parser.tab.c"
+#line 1541 "parser.tab.c"
     break;
 
   case 31: /* primary: '(' expression ')'  */
 #line 114 "parser.y"
                            {(yyval.type) = (yyvsp[-1].type);}
-#line 1541 "parser.tab.c"
+#line 1547 "parser.tab.c"
     break;
 
   case 35: /* primary: IDENTIFIER '(' expression ')'  */
 #line 118 "parser.y"
                                       {(yyval.type) = find(lists, (yyvsp[-3].iden), "List");}
-#line 1547 "parser.tab.c"
+#line 1553 "parser.tab.c"
     break;
 
   case 36: /* primary: IDENTIFIER  */
 #line 119 "parser.y"
                     {(yyval.type) = find(scalars, (yyvsp[0].iden), "Scalar");}
-#line 1553 "parser.tab.c"
+#line 1559 "parser.tab.c"
     break;
 
 
-#line 1557 "parser.tab.c"
+#line 1563 "parser.tab.c"
 
       default: break;
     }

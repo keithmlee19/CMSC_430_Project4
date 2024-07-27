@@ -42,6 +42,13 @@ Types checkCases(Types left, Types right) {
 	return MISMATCH;
 }
 
+Types checkLists(Types left, Types right) {
+	if (left == MISMATCH || right == MISMATCH)
+		return MISMATCH;
+	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match");
+	return MISMATCH;
+}
+
 Types checkArithmetic(Types left, Types right) {
 	if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;

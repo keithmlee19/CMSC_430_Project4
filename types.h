@@ -14,5 +14,6 @@ void checkAssignment(Types lValue, Types rValue, string message);
 Types checkWhen(Types true_, Types false_);
 Types checkSwitch(Types case_, Types when, Types other);
 Types checkCases(Types left, Types right);
+Types checkLists(Types left, Types right);
 Types checkArithmetic(Types left, Types right);
 

@@ -70,7 +70,7 @@ list:
 	'(' expressions ')' {$$ = $2;} ;
 
 expressions:
-	expressions ',' expression | 
+	expressions ',' expression {$$ = checkLists($1, $3);} | 
 	expression ;
 
 body:
