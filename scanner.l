@@ -59,6 +59,7 @@ when		{ ECHO; return(WHEN); }
 {id}		{ ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 
 			strcpy(yylval.iden, yytext); return(IDENTIFIER);}
 {dec}		{ ECHO; yylval.type = INT_TYPE; return(INT_LITERAL); }
+{hex}		{ ECHO; yylval.type = INT_TYPE; return(INT_LITERAL); }
 {real}		{ ECHO; yylval.type = REAL_TYPE; return(REAL_LITERAL); }
 {char}		{ ECHO; yylval.type = CHAR_TYPE; return(CHAR_LITERAL); }
 {punc}		{ ECHO; return(yytext[0]); }
