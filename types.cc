@@ -33,7 +33,7 @@ void checkAssignment(Types lValue, Types rValue, string message) {
 
 void checkListVar(Types lValue, Types rValue) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
-		appendError(GENERAL_SEMANTIC, "List Type " + ToString(lValue) + " Does Not Match Element Type " + ToString(rValue));
+		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type");
 }
 
 Types checkWhen(Types true_, Types false_) {
@@ -64,7 +64,7 @@ Types checkListElems(Types left, Types right) {
 		return left;
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "Element Type " + ToString(left) + " Does Not Match Element Type " + ToString(right));
+	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match");
 	return MISMATCH;
 }
 
