@@ -1470,7 +1470,7 @@ yyreduce:
 
   case 10: /* variable: IDENTIFIER ':' LIST OF type IS list ';'  */
 #line 67 "parser.y"
-                                                {checkListVar((yyvsp[-3].type),(yyvsp[-1].type)); lists.insert((yyvsp[-7].iden), (yyvsp[-3].type));}
+                                                {lists.insert((yyvsp[-7].iden), (yyvsp[-3].type));}
 #line 1475 "parser.tab.c"
     break;
 

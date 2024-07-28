@@ -13,10 +13,24 @@ using namespace std;
 #include "types.h"
 #include "listing.h"
 
+/*
+const string ToString(Types t)
+{
+    switch (t)
+    {
+        case MISMATCH:   return "MISMATCH ";
+        case INT_TYPE:   return "INT_TYPE ";
+        case CHAR_TYPE: return "CHAR_TYPE ";
+		case REAL_TYPE: return "REAL_TYPE ";
+		case NONE: return "NONE ";
+        default:      return "OTHER ";
+    }
+}
+*/
+
 void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
-		if (!((lValue == INT_TYPE && rValue == REAL_TYPE) || (lValue == REAL_TYPE && rValue == INT_TYPE)))
-			appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
+		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
 }
 
 void checkListVar(Types lValue, Types rValue) {
@@ -55,14 +69,14 @@ Types checkListElems(Types left, Types right) {
 }
 
 Types checkArithmetic(Types left, Types right) {
-	if (left == MISMATCH || right == MISMATCH)
-		return MISMATCH;
 	if (left == INT_TYPE && right == INT_TYPE)
 		return INT_TYPE;
-	if (left == INT_TYPE && right == REAL_TYPE)
-		return INT_TYPE;
-	if (left == REAL_TYPE && right == INT_TYPE)
-		return INT_TYPE;
+	else if (left == INT_TYPE && right == REAL_TYPE)
+		return REAL_TYPE;
+	else if (left == REAL_TYPE && right == INT_TYPE)
+		return REAL_TYPE;
+	else if (left == MISMATCH || right == MISMATCH)
+		return MISMATCH;
 	appendError(GENERAL_SEMANTIC, "Integer Type Required");
 	return MISMATCH;
 }

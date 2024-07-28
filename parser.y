@@ -64,7 +64,7 @@ optional_variable:
     
 variable:	
 	IDENTIFIER ':' type IS statement ';' {checkAssignment($3, $5, "Variable Initialization"); scalars.insert($1, $3);} |
-	IDENTIFIER ':' LIST OF type IS list ';' {checkListVar($5,$7); lists.insert($1, $5);} ;
+	IDENTIFIER ':' LIST OF type IS list ';' {lists.insert($1, $5);} ;
 
 list:
 	'(' expressions ')' {$$ = $2;} ;
