@@ -1470,7 +1470,7 @@ yyreduce:
 
   case 10: /* variable: IDENTIFIER ':' LIST OF type IS list ';'  */
 #line 67 "parser.y"
-                                                {lists.insert((yyvsp[-7].iden), (yyvsp[-3].type));}
+                                                {checkListVar((yyvsp[-3].type), (yyvsp[-1].type)); lists.insert((yyvsp[-7].iden), (yyvsp[-3].type));}
 #line 1475 "parser.tab.c"
     break;
 
@@ -1548,7 +1548,7 @@ yyreduce:
 
   case 35: /* primary: IDENTIFIER '(' expression ')'  */
 #line 118 "parser.y"
-                                      {(yyval.type) = find(lists, (yyvsp[-3].iden), "List");}
+                                      {checkSubInteger((yyvsp[-1].type)); (yyval.type) = find(lists, (yyvsp[-3].iden), "List");}
 #line 1553 "parser.tab.c"
     break;
 

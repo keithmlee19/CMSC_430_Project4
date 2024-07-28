@@ -13,7 +13,6 @@ using namespace std;
 #include "types.h"
 #include "listing.h"
 
-/*
 const string ToString(Types t)
 {
     switch (t)
@@ -26,7 +25,6 @@ const string ToString(Types t)
         default:      return "OTHER ";
     }
 }
-*/
 
 void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
@@ -35,7 +33,7 @@ void checkAssignment(Types lValue, Types rValue, string message) {
 
 void checkListVar(Types lValue, Types rValue) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
-		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type ");
+		appendError(GENERAL_SEMANTIC, "List Type " + ToString(lValue) + " Does Not Match Element Type " + ToString(rValue));
 }
 
 Types checkWhen(Types true_, Types false_) {
@@ -62,9 +60,11 @@ Types checkCases(Types left, Types right) {
 }
 
 Types checkListElems(Types left, Types right) {
-	if (left == MISMATCH || right == MISMATCH)
+	if (left == right)
+		return left;
+	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match");
+	appendError(GENERAL_SEMANTIC, "Element Type " + ToString(left) + " Does Not Match Element Type " + ToString(right));
 	return MISMATCH;
 }
 
@@ -78,5 +78,12 @@ Types checkArithmetic(Types left, Types right) {
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
 	appendError(GENERAL_SEMANTIC, "Integer Type Required");
+	return MISMATCH;
+}
+
+Types checkSubInteger(Types sub) {
+	if (sub == INT_TYPE)
+		return INT_TYPE;
+	appendError(GENERAL_SEMANTIC, "List Subscript Must Be Integer");
 	return MISMATCH;
 }
