@@ -36,7 +36,7 @@ Symbols<Types> lists;
 
 %token <type> INT_LITERAL CHAR_LITERAL REAL_LITERAL
 
-%token ADDOP MULOP RELOP ANDOP ARROW
+%token ADDOP MULOP MODOP EXPOP ANDOP OROP RELOP NEGOP NOTOP ARROW
 
 %token BEGIN_ CASE CHARACTER ELSE ELSIF END ENDIF ENDSWITCH FUNCTION IF INTEGER IS LIST OF OTHERS
 	REAL RETURNS SWITCH THEN WHEN
@@ -82,7 +82,7 @@ statement_:
 	
 statement:
 	expression |
-	WHEN condition ',' expression ':' expression 
+	WHEN or_condition ',' expression ':' expression 
 		{$$ = checkWhen($4, $6);} |
 	SWITCH expression IS cases OTHERS ARROW statement ';' ENDSWITCH 
 		{$$ = checkSwitch($2, $4, $7);} ;
@@ -93,13 +93,21 @@ cases:
 	
 case:
 	CASE INT_LITERAL ARROW statement ';' {$$ = $4;} ; 
+	
+or_condition:
+	or_condition OROP condition |
+	condition ;
 
 condition:
-	condition ANDOP relation |
+	condition ANDOP not_condition |
+	not_condition ;
+	
+not_condition:
+	NOTOP relation |
 	relation ;
 
 relation:
-	'(' condition')' |
+	'(' or_condition')' |
 	expression RELOP expression ;
 	
 expression:

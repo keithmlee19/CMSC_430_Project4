@@ -60,29 +60,34 @@ extern int yydebug;
     REAL_LITERAL = 261,            /* REAL_LITERAL  */
     ADDOP = 262,                   /* ADDOP  */
     MULOP = 263,                   /* MULOP  */
-    RELOP = 264,                   /* RELOP  */
-    ANDOP = 265,                   /* ANDOP  */
-    ARROW = 266,                   /* ARROW  */
-    BEGIN_ = 267,                  /* BEGIN_  */
-    CASE = 268,                    /* CASE  */
-    CHARACTER = 269,               /* CHARACTER  */
-    ELSE = 270,                    /* ELSE  */
-    ELSIF = 271,                   /* ELSIF  */
-    END = 272,                     /* END  */
-    ENDIF = 273,                   /* ENDIF  */
-    ENDSWITCH = 274,               /* ENDSWITCH  */
-    FUNCTION = 275,                /* FUNCTION  */
-    IF = 276,                      /* IF  */
-    INTEGER = 277,                 /* INTEGER  */
-    IS = 278,                      /* IS  */
-    LIST = 279,                    /* LIST  */
-    OF = 280,                      /* OF  */
-    OTHERS = 281,                  /* OTHERS  */
-    REAL = 282,                    /* REAL  */
-    RETURNS = 283,                 /* RETURNS  */
-    SWITCH = 284,                  /* SWITCH  */
-    THEN = 285,                    /* THEN  */
-    WHEN = 286                     /* WHEN  */
+    MODOP = 264,                   /* MODOP  */
+    EXPOP = 265,                   /* EXPOP  */
+    ANDOP = 266,                   /* ANDOP  */
+    OROP = 267,                    /* OROP  */
+    RELOP = 268,                   /* RELOP  */
+    NEGOP = 269,                   /* NEGOP  */
+    NOTOP = 270,                   /* NOTOP  */
+    ARROW = 271,                   /* ARROW  */
+    BEGIN_ = 272,                  /* BEGIN_  */
+    CASE = 273,                    /* CASE  */
+    CHARACTER = 274,               /* CHARACTER  */
+    ELSE = 275,                    /* ELSE  */
+    ELSIF = 276,                   /* ELSIF  */
+    END = 277,                     /* END  */
+    ENDIF = 278,                   /* ENDIF  */
+    ENDSWITCH = 279,               /* ENDSWITCH  */
+    FUNCTION = 280,                /* FUNCTION  */
+    IF = 281,                      /* IF  */
+    INTEGER = 282,                 /* INTEGER  */
+    IS = 283,                      /* IS  */
+    LIST = 284,                    /* LIST  */
+    OF = 285,                      /* OF  */
+    OTHERS = 286,                  /* OTHERS  */
+    REAL = 287,                    /* REAL  */
+    RETURNS = 288,                 /* RETURNS  */
+    SWITCH = 289,                  /* SWITCH  */
+    THEN = 290,                    /* THEN  */
+    WHEN = 291                     /* WHEN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -96,7 +101,7 @@ union YYSTYPE
 	CharPtr iden;
 	Types type;
 
-#line 100 "parser.tab.h"
+#line 105 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
