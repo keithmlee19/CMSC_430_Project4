@@ -67,18 +67,22 @@ extern int yydebug;
     CASE = 268,                    /* CASE  */
     CHARACTER = 269,               /* CHARACTER  */
     ELSE = 270,                    /* ELSE  */
-    END = 271,                     /* END  */
-    ENDSWITCH = 272,               /* ENDSWITCH  */
-    FUNCTION = 273,                /* FUNCTION  */
-    INTEGER = 274,                 /* INTEGER  */
-    IS = 275,                      /* IS  */
-    LIST = 276,                    /* LIST  */
-    OF = 277,                      /* OF  */
-    OTHERS = 278,                  /* OTHERS  */
-    REAL = 279,                    /* REAL  */
-    RETURNS = 280,                 /* RETURNS  */
-    SWITCH = 281,                  /* SWITCH  */
-    WHEN = 282                     /* WHEN  */
+    ELSIF = 271,                   /* ELSIF  */
+    END = 272,                     /* END  */
+    ENDIF = 273,                   /* ENDIF  */
+    ENDSWITCH = 274,               /* ENDSWITCH  */
+    FUNCTION = 275,                /* FUNCTION  */
+    IF = 276,                      /* IF  */
+    INTEGER = 277,                 /* INTEGER  */
+    IS = 278,                      /* IS  */
+    LIST = 279,                    /* LIST  */
+    OF = 280,                      /* OF  */
+    OTHERS = 281,                  /* OTHERS  */
+    REAL = 282,                    /* REAL  */
+    RETURNS = 283,                 /* RETURNS  */
+    SWITCH = 284,                  /* SWITCH  */
+    THEN = 285,                    /* THEN  */
+    WHEN = 286                     /* WHEN  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -92,7 +96,7 @@ union YYSTYPE
 	CharPtr iden;
 	Types type;
 
-#line 96 "parser.tab.h"
+#line 100 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

@@ -55,6 +55,11 @@ real		{ ECHO; return(REAL); }
 returns		{ ECHO; return(RETURNS); }
 switch		{ ECHO; return(SWITCH); }
 when		{ ECHO; return(WHEN); }
+else		{ ECHO; return(ELSE); }
+elsif		{ ECHO; return(ELSIF); }
+endif		{ ECHO; return(ENDIF); }
+if		{ ECHO; return(IF); }
+then		{ ECHO; return(THEN); }
 
 {id}		{ ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 
 			strcpy(yylval.iden, yytext); return(IDENTIFIER);}
