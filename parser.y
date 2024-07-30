@@ -41,8 +41,8 @@ Symbols<Types> lists;
 %token BEGIN_ CASE CHARACTER ELSE ELSIF END ENDIF ENDSWITCH FUNCTION IF INTEGER IS LIST OF OTHERS
 	REAL RETURNS SWITCH THEN WHEN
 
-%type <type> list expressions body type statement_ statement cases case expression
-	term primary
+%type <type> list expressions body type statement_ statement cases case_ case expression
+	term primary elsif_clauses elsif_clause
 
 %%
 
@@ -85,11 +85,24 @@ statement:
 	WHEN or_condition ',' expression ':' expression 
 		{$$ = checkWhen($4, $6);} |
 	SWITCH expression IS cases OTHERS ARROW statement ';' ENDSWITCH 
-		{$$ = checkSwitch($2, $4, $7);} ;
+		{$$ = checkSwitch($2, $4, $7);} |
+	IF or_condition THEN statement_ elsif_clauses ELSE statement_ ENDIF
+		{$$ = checkIf($4, $5, $7);} ;
+
+elsif_clauses:
+	elsif_clauses elsif_clause |
+	%empty {$$ = NONE;} ;
+
+elsif_clause:
+	ELSIF or_condition THEN statement_ {$$ = $4;} ;
 
 cases:
-	cases case {$$ = checkCases($1, $2);} |
+	cases case_ {$$ = checkCases($1, $2);} |
 	%empty {$$ = NONE;} ;
+
+case_:
+	case |
+	error ';' {$$ = MISMATCH;} ;
 	
 case:
 	CASE INT_LITERAL ARROW statement ';' {$$ = $4;} ; 
@@ -108,7 +121,7 @@ not_condition:
 
 relation:
 	'(' or_condition')' |
-	expression RELOP expression ;
+	expression RELOP expression {checkRelopTypes($1, $3);} ;
 	
 expression:
 	expression ADDOP term {$$ = checkArithmetic($1, $3);} |

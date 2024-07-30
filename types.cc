@@ -36,6 +36,12 @@ void checkListVar(Types lValue, Types rValue) {
 		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type");
 }
 
+void checkRelopTypes(Types lValue, Types rValue) {
+	if (lValue != MISMATCH && rValue != MISMATCH)
+		if (lValue == (INT_TYPE || REAL_TYPE) && rValue == CHAR_TYPE || lValue == CHAR_TYPE && rValue == (INT_TYPE || REAL_TYPE))
+			appendError(GENERAL_SEMANTIC, "Character Literals Cannot be Compared to Numeric Expressions ");
+}
+
 Types checkWhen(Types true_, Types false_) {
 	if (true_ == MISMATCH || false_ == MISMATCH)
 		return MISMATCH;
@@ -57,6 +63,15 @@ Types checkCases(Types left, Types right) {
 		return right;
 	appendError(GENERAL_SEMANTIC, "Case Types Mismatch");
 	return MISMATCH;
+}
+
+Types checkIf(Types left, Types middle, Types right) {
+	if (left == MISMATCH || middle == MISMATCH || right == MISMATCH)
+		return MISMATCH;
+	if (middle != NONE)
+		if (!(left == right && left == middle && middle == right))
+			appendError(GENERAL_SEMANTIC, "If " + ToString(left) + " Elsif " + ToString(middle) + " Else " + ToString(right));
+	return left;
 }
 
 Types checkListElems(Types left, Types right) {
