@@ -70,7 +70,7 @@ Types checkIf(Types left, Types middle, Types right) {
 		return MISMATCH;
 	if (middle != NONE)
 		if (!(left == right && left == middle && middle == right))
-			appendError(GENERAL_SEMANTIC, "If " + ToString(left) + " Elsif " + ToString(middle) + " Else " + ToString(right));
+			appendError(GENERAL_SEMANTIC, "If-Elsif-Else Type Mismatch ");
 	return left;
 }
 
@@ -79,7 +79,7 @@ Types checkListElems(Types left, Types right) {
 		return left;
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match");
+	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match ");
 	return MISMATCH;
 }
 
@@ -92,13 +92,20 @@ Types checkArithmetic(Types left, Types right) {
 		return REAL_TYPE;
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "Arithmetic Operator Requires Numeric Types");
+	appendError(GENERAL_SEMANTIC, "Arithmetic Operator Requires Numeric Types ");
 	return MISMATCH;
 }
 
 Types checkSubInteger(Types sub) {
 	if (sub == INT_TYPE)
 		return INT_TYPE;
-	appendError(GENERAL_SEMANTIC, "List Subscript Must Be Integer");
+	appendError(GENERAL_SEMANTIC, "List Subscript Must Be Integer ");
+	return MISMATCH;
+}
+
+Types checkMod(Types left, Types right) {
+	if (left == INT_TYPE && right == INT_TYPE)
+		return INT_TYPE;
+	appendError(GENERAL_SEMANTIC, "Remainder Operator Requires Integer Operands ");
 	return MISMATCH;
 }

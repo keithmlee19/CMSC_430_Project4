@@ -1616,7 +1616,7 @@ yyreduce:
 
   case 40: /* term: term MODOP exp_term  */
 #line 132 "parser.y"
-                            {(yyval.type) = checkArithmetic((yyvsp[-2].type), (yyvsp[0].type));}
+                            {(yyval.type) = checkMod((yyvsp[-2].type), (yyvsp[0].type));}
 #line 1621 "parser.tab.c"
     break;
 

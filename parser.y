@@ -129,7 +129,7 @@ expression:
       
 term:
 	term MULOP exp_term {$$ = checkArithmetic($1, $3);} |
-	term MODOP exp_term {$$ = checkArithmetic($1, $3);} |
+	term MODOP exp_term {$$ = checkMod($1, $3);} |
 	exp_term ;
 	
 // the only right associative binary operator
