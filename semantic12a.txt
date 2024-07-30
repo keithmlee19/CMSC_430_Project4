@@ -1,0 +1,8 @@
+// Using Character Literal with Exponentiation Operator
+
+function main returns integer;
+    c: character is ~7;
+begin
+    5 ^ 'P';
+end;
+

@@ -42,7 +42,7 @@ Symbols<Types> lists;
 	REAL RETURNS SWITCH THEN WHEN
 
 %type <type> list expressions body type statement_ statement cases case_ case expression
-	term primary elsif_clauses elsif_clause
+	term primary exp_term neg_term elsif_clauses elsif_clause
 
 %%
 
@@ -128,7 +128,17 @@ expression:
 	term ;
       
 term:
-	term MULOP primary {$$ = checkArithmetic($1, $3);} |
+	term MULOP exp_term {$$ = checkArithmetic($1, $3);} |
+	term MODOP exp_term {$$ = checkArithmetic($1, $3);} |
+	exp_term ;
+	
+// the only right associative binary operator
+exp_term:
+	neg_term EXPOP exp_term {$$ = checkArithmetic($1, $3);} |
+	neg_term ;
+
+neg_term:
+	NEGOP primary {$$ = checkArithmetic($2,$2);} |
 	primary ;
 
 primary:

@@ -92,7 +92,7 @@ Types checkArithmetic(Types left, Types right) {
 		return REAL_TYPE;
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "Integer Type Required");
+	appendError(GENERAL_SEMANTIC, "Arithmetic Operator Requires Numeric Types");
 	return MISMATCH;
 }
 
