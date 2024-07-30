@@ -68,10 +68,13 @@ Types checkCases(Types left, Types right) {
 Types checkIf(Types left, Types middle, Types right) {
 	if (left == MISMATCH || middle == MISMATCH || right == MISMATCH)
 		return MISMATCH;
-	if (middle != NONE)
-		if (!(left == right && left == middle && middle == right))
-			appendError(GENERAL_SEMANTIC, "If-Elsif-Else Type Mismatch ");
-	return left;
+	if (middle == NONE)
+		if (left == right)
+			return left;
+	else if (left == middle && left == right && middle == right)
+		return left;
+	appendError(GENERAL_SEMANTIC, "If-Elsif-Else Type Mismatch ");
+	return MISMATCH;
 }
 
 Types checkListElems(Types left, Types right) {
