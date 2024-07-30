@@ -63,14 +63,18 @@ is		{ ECHO; return(IS); }
 list		{ ECHO; return(LIST); }
 of		{ ECHO; return(OF); }
 others		{ ECHO; return(OTHERS); }
-real		{ ECHO; return(REAL); }
 returns		{ ECHO; return(RETURNS); }
 switch		{ ECHO; return(SWITCH); }
 when		{ ECHO; return(WHEN); }
 else		{ ECHO; return(ELSE); }
 elsif		{ ECHO; return(ELSIF); }
+endfold		{ ECHO; return(ENDFOLD); }
 endif		{ ECHO; return(ENDIF); }
+fold		{ ECHO; return(FOLD); }
 if		{ ECHO; return(IF); }
+left		{ ECHO; return(LEFT); }
+real		{ ECHO; return(REAL); }
+right		{ ECHO; return(RIGHT); }
 then		{ ECHO; return(THEN); }
 
 {id}		{ ECHO; yylval.iden = (CharPtr)malloc(yyleng + 1); 

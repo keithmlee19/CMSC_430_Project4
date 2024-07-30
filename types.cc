@@ -28,7 +28,10 @@ const string ToString(Types t)
 
 void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
-		appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
+		if (lValue == INT_TYPE && rValue == REAL_TYPE)
+			appendError(GENERAL_SEMANTIC, "Illegal Narrowing Variable Initialization ");
+		else
+			appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
 }
 
 void checkListVar(Types lValue, Types rValue) {
@@ -110,5 +113,12 @@ Types checkMod(Types left, Types right) {
 	if (left == INT_TYPE && right == INT_TYPE)
 		return INT_TYPE;
 	appendError(GENERAL_SEMANTIC, "Remainder Operator Requires Integer Operands ");
+	return MISMATCH;
+}
+
+Types checkFold(Types listType) {
+	if (listType == INT_TYPE || listType == REAL_TYPE)
+		return listType;
+	appendError(GENERAL_SEMANTIC, "Fold Requires A Numeric List ");
 	return MISMATCH;
 }

@@ -22,4 +22,5 @@ Types checkListElems(Types left, Types right);
 Types checkArithmetic(Types left, Types right);
 Types checkSubInteger(Types sub);
 Types checkMod(Types left, Types right);
+Types checkFold(Types listType);
 

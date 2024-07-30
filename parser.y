@@ -38,10 +38,10 @@ Symbols<Types> lists;
 
 %token ADDOP MULOP MODOP EXPOP ANDOP OROP RELOP NEGOP NOTOP ARROW
 
-%token BEGIN_ CASE CHARACTER ELSE ELSIF END ENDIF ENDSWITCH FUNCTION IF INTEGER IS LIST OF OTHERS
-	REAL RETURNS SWITCH THEN WHEN
+%token BEGIN_ CASE CHARACTER ELSE ELSIF END ENDFOLD ENDIF ENDSWITCH FOLD FUNCTION IF INTEGER IS LEFT LIST OF OTHERS
+	REAL RETURNS RIGHT SWITCH THEN WHEN
 
-%type <type> list expressions body type statement_ statement cases case_ case expression
+%type <type> list list_choice expressions body type statement_ statement cases case_ case expression
 	term primary exp_term neg_term elsif_clauses elsif_clause
 
 %%
@@ -68,6 +68,10 @@ variable:
 
 list:
 	'(' expressions ')' {$$ = $2;} ;
+	
+list_choice:
+	list |
+	IDENTIFIER ;
 
 expressions:
 	expressions ',' expression {$$ = checkListElems($1, $3);} | 
@@ -87,7 +91,8 @@ statement:
 	SWITCH expression IS cases OTHERS ARROW statement ';' ENDSWITCH 
 		{$$ = checkSwitch($2, $4, $7);} |
 	IF or_condition THEN statement_ elsif_clauses ELSE statement_ ENDIF
-		{$$ = checkIf($4, $5, $7);} ;
+		{$$ = checkIf($4, $5, $7);} |
+	FOLD direction operator list_choice ENDFOLD {$$ = checkFold($4);} ;
 
 elsif_clauses:
 	elsif_clauses elsif_clause |
@@ -105,7 +110,16 @@ case_:
 	error ';' {$$ = MISMATCH;} ;
 	
 case:
-	CASE INT_LITERAL ARROW statement ';' {$$ = $4;} ; 
+	CASE INT_LITERAL ARROW statement ';' {$$ = $4;} ;
+
+direction:
+	LEFT |
+	RIGHT ;
+
+operator:
+	ADDOP |
+	MULOP |
+	EXPOP ;
 	
 or_condition:
 	or_condition OROP condition |
