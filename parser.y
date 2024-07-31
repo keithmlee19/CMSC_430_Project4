@@ -47,7 +47,7 @@ Symbols<Types> lists;
 %%
 
 function:	
-	function_header optional_variable body {checkAssignment($1,$3,"Function Return");} ;
+	function_header optional_variable_ body {checkAssignment($1,$3,"Function Return");} ;
 		
 function_header:	
 	FUNCTION IDENTIFIER RETURNS type ';' {$$ = $4;} ;
@@ -56,21 +56,25 @@ type:
 	INTEGER {$$ = INT_TYPE;} |
 	CHARACTER {$$ = CHAR_TYPE; } |
 	REAL {$$ = REAL_TYPE; };
+
+optional_variable_:
+	optional_variable |
+	error ';' ;
 	
 optional_variable:
-	variable |
+	optional_variable variable |
 	%empty ;
     
 variable:	
-	IDENTIFIER ':' type IS statement ';' {checkAssignment($3, $5, "Variable Initialization"); scalars.insert($1, $3);} |
-	IDENTIFIER ':' LIST OF type IS list ';' {checkListVar($5, $7); lists.insert($1, $5);} ;
+	IDENTIFIER ':' type IS statement ';' {checkAssignment($3, $5, "Variable Initialization"); scalars.findDup($1, "Scalar "); scalars.insert($1, $3);} |
+	IDENTIFIER ':' LIST OF type IS list ';' {checkListVar($5, $7); lists.findDup($1, "List "); lists.insert($1, $5);} ;
 
 list:
 	'(' expressions ')' {$$ = $2;} ;
 	
 list_choice:
 	list |
-	IDENTIFIER ;
+	IDENTIFIER {$$ = find(scalars, $1, "Scalar");} ;
 
 expressions:
 	expressions ',' expression {$$ = checkListElems($1, $3);} | 

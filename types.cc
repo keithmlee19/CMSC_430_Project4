@@ -34,8 +34,8 @@ void checkAssignment(Types lValue, Types rValue, string message) {
 			appendError(GENERAL_SEMANTIC, "Type Mismatch on Variable Initialization ");
 }
 
-void checkListVar(Types lValue, Types rValue) {
-	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
+void checkListVar(Types listVar, Types listType) {
+	if (listVar != MISMATCH && listType != MISMATCH && listVar != listType)
 		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type");
 }
 
@@ -68,6 +68,19 @@ Types checkCases(Types left, Types right) {
 	return MISMATCH;
 }
 
+Types checkArithmetic(Types left, Types right) {
+	if (left == INT_TYPE && right == INT_TYPE)
+		return INT_TYPE;
+	else if (left == INT_TYPE && right == REAL_TYPE)
+		return REAL_TYPE;
+	else if (left == REAL_TYPE && right == INT_TYPE)
+		return REAL_TYPE;
+	else if (left == MISMATCH || right == MISMATCH)
+		return MISMATCH;
+	appendError(GENERAL_SEMANTIC, "Arithmetic Operator Requires Numeric Types ");
+	return MISMATCH;
+}
+
 Types checkIf(Types left, Types middle, Types right) {
 	if (left == MISMATCH || middle == MISMATCH || right == MISMATCH)
 		return MISMATCH;
@@ -86,19 +99,6 @@ Types checkListElems(Types left, Types right) {
 	else if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
 	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match ");
-	return MISMATCH;
-}
-
-Types checkArithmetic(Types left, Types right) {
-	if (left == INT_TYPE && right == INT_TYPE)
-		return INT_TYPE;
-	else if (left == INT_TYPE && right == REAL_TYPE)
-		return REAL_TYPE;
-	else if (left == REAL_TYPE && right == INT_TYPE)
-		return REAL_TYPE;
-	else if (left == MISMATCH || right == MISMATCH)
-		return MISMATCH;
-	appendError(GENERAL_SEMANTIC, "Arithmetic Operator Requires Numeric Types ");
 	return MISMATCH;
 }
 

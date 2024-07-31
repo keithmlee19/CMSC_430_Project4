@@ -11,6 +11,7 @@ class Symbols
 public:
 	void insert(char* lexeme, T entry);
 	bool find(char* lexeme, T& entry);
+	bool findDup(char* lexeme, string message);
 private:
 	map<string, T> symbols;
 };
@@ -31,5 +32,17 @@ bool Symbols<T>::find(char* lexeme, T& entry)
 	bool found = iterator != symbols.end();
 	if (found)
 		entry = iterator->second;
+	return found;
+}
+
+template <typename T>
+bool Symbols<T>::findDup(char* lexeme, string message)
+{
+	string name(lexeme);
+	typedef typename map<string, T>::iterator Iterator;
+	Iterator iterator = symbols.find(name);
+	bool found = iterator != symbols.end();
+	if (found)
+		appendError(GENERAL_SEMANTIC, "Duplicate " + message + name);
 	return found;
 }
