@@ -13,6 +13,7 @@ using namespace std;
 #include "types.h"
 #include "listing.h"
 
+// just a helper function to help me troubleshoot the other functions
 const string ToString(Types t)
 {
     switch (t)
@@ -36,7 +37,7 @@ void checkAssignment(Types lValue, Types rValue, string message) {
 
 void checkListVar(Types listVar, Types listType) {
 	if (listVar != MISMATCH && listType != MISMATCH && listVar != listType)
-		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type");
+		appendError(GENERAL_SEMANTIC, "List Type Does Not Match Element Type ");
 }
 
 void checkRelopTypes(Types lValue, Types rValue) {
@@ -55,7 +56,7 @@ Types checkWhen(Types true_, Types false_) {
 
 Types checkSwitch(Types case_, Types when, Types other) {
 	if (case_ != INT_TYPE)
-		appendError(GENERAL_SEMANTIC, "Switch Expression Not Integer");
+		appendError(GENERAL_SEMANTIC, "Switch Expression Not Integer ");
 	return checkCases(when, other);
 }
 
@@ -64,7 +65,7 @@ Types checkCases(Types left, Types right) {
 		return MISMATCH;
 	if (left == NONE || left == right)
 		return right;
-	appendError(GENERAL_SEMANTIC, "Case Types Mismatch");
+	appendError(GENERAL_SEMANTIC, "Case Types Mismatch ");
 	return MISMATCH;
 }
 

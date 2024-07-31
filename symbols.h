@@ -42,6 +42,7 @@ bool Symbols<T>::findDup(char* lexeme, string message)
 	typedef typename map<string, T>::iterator Iterator;
 	Iterator iterator = symbols.find(name);
 	bool found = iterator != symbols.end();
+	// adds error message with name of variable
 	if (found)
 		appendError(GENERAL_SEMANTIC, "Duplicate " + message + name);
 	return found;

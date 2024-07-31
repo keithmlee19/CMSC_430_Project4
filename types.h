@@ -10,7 +10,9 @@ typedef char* CharPtr;
 
 enum Types {MISMATCH, INT_TYPE, CHAR_TYPE, REAL_TYPE, NONE};
 
+// just a helper function to help me troubleshoot the other functions
 const string ToString(Types t);
+
 void checkAssignment(Types lValue, Types rValue, string message);
 void checkListVar(Types listVar, Types listType);
 void checkRelopTypes(Types lValue, Types rValue);
