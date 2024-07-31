@@ -144,7 +144,7 @@ Nonterminals, with rules where they appear
     function (47)
         on left: 1
         on right: 0
-    function_header (48)
+    function_header <type> (48)
         on left: 2
         on right: 1
     type <type> (49)

@@ -42,16 +42,15 @@ Symbols<Types> lists;
 	REAL RETURNS RIGHT SWITCH THEN WHEN
 
 %type <type> list list_choice expressions body type statement_ statement cases case_ case expression
-	term primary exp_term neg_term elsif_clauses elsif_clause
+	term primary exp_term neg_term elsif_clauses elsif_clause function_header
 
 %%
 
 function:	
-	function_header optional_variable body ;
-	
+	function_header optional_variable body {checkAssignment($1,$3,"Function Return");} ;
 		
 function_header:	
-	FUNCTION IDENTIFIER RETURNS type ';' ;
+	FUNCTION IDENTIFIER RETURNS type ';' {$$ = $4;} ;
 
 type:
 	INTEGER {$$ = INT_TYPE;} |

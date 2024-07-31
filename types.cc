@@ -29,9 +29,9 @@ const string ToString(Types t)
 void checkAssignment(Types lValue, Types rValue, string message) {
 	if (lValue != MISMATCH && rValue != MISMATCH && lValue != rValue)
 		if (lValue == INT_TYPE && rValue == REAL_TYPE)
-			appendError(GENERAL_SEMANTIC, "Illegal Narrowing Variable Initialization ");
+			appendError(GENERAL_SEMANTIC, "Illegal Narrowing " + message);
 		else
-			appendError(GENERAL_SEMANTIC, "Type Mismatch on " + message);
+			appendError(GENERAL_SEMANTIC, "Type Mismatch on Variable Initialization ");
 }
 
 void checkListVar(Types lValue, Types rValue) {
