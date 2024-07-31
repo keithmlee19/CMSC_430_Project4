@@ -94,10 +94,10 @@ Types checkIf(Types left, Types middle, Types right) {
 }
 
 Types checkListElems(Types left, Types right) {
-	if (left == right)
-		return left;
-	else if (left == MISMATCH || right == MISMATCH)
+	if (left == MISMATCH || right == MISMATCH)
 		return MISMATCH;
+	else if (left == right)
+		return left;
 	appendError(GENERAL_SEMANTIC, "List Element Types Do Not Match ");
 	return MISMATCH;
 }
